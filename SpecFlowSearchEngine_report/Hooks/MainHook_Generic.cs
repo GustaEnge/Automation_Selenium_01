@@ -19,6 +19,7 @@ namespace SpecFlowSearchEngine_report.Hooks
         public static ExtentTest featureName;
         public static ExtentTest scenario;
         public static ExtentReports extent;
+        public static dynamic projectPath;
 
         public static IWebDriver getDriver()
         {
@@ -31,7 +32,7 @@ namespace SpecFlowSearchEngine_report.Hooks
             //Here this part will get the fullpath of this project (current) and extract only the local
             var path = System.Reflection.Assembly.GetCallingAssembly().CodeBase;
             var actualPath = path.Substring(0, path.LastIndexOf("bin"));
-            var projectPath = new Uri(actualPath).LocalPath;
+            projectPath = new Uri(actualPath).LocalPath;
             Directory.CreateDirectory(projectPath.ToString() + "Reports");
 
 
@@ -56,6 +57,10 @@ namespace SpecFlowSearchEngine_report.Hooks
         public static void AfterTestRun()
         {
             extent.Flush();
+
+
+            driver = new ChromeDriver();
+            driver.Navigate().GoToUrl(projectPath.ToString() + @"\Reports\index.html");
         }
 
         [BeforeScenario]
@@ -98,6 +103,7 @@ namespace SpecFlowSearchEngine_report.Hooks
                     scenario.CreateNode<Then>(ScenarioStepContext.Current.StepInfo.Text).Fail(ScenarioContext.Current.TestError.Message);
             }
 
+            
         }
 
     }
