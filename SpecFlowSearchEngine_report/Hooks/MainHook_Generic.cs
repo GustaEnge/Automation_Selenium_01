@@ -37,6 +37,7 @@ namespace SpecFlowSearchEngine_report.Hooks
 
 
             var reportPath = projectPath + "Reports\\Index.html";
+            
 
             var htmlReporter = new ExtentHtmlReporter(reportPath);
             htmlReporter.LoadConfig(projectPath + "report-config.xml"); // load based on report-config.xml
@@ -44,8 +45,8 @@ namespace SpecFlowSearchEngine_report.Hooks
             extent = new ExtentReports();
             extent.AttachReporter(htmlReporter);
 
-            path_chrome = projectPath.ToString();
-
+            //path_chrome = projectPath.ToString();
+            path_chrome = Environment.GetEnvironmentVariable("webdriver.chrome.driver");
 
         }
 
