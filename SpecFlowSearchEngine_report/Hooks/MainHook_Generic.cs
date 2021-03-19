@@ -20,7 +20,7 @@ namespace SpecFlowSearchEngine_report.Hooks
         public static ExtentTest scenario;
         public static ExtentReports extent;
         public static dynamic projectPath;
-
+        public static string path;
         public static IWebDriver getDriver()
         {
             return driver;
@@ -43,7 +43,10 @@ namespace SpecFlowSearchEngine_report.Hooks
             htmlReporter.Config.Theme = AventStack.ExtentReports.Reporter.Configuration.Theme.Dark;
             extent = new ExtentReports();
             extent.AttachReporter(htmlReporter);
-            
+
+            path = projectPath + @"SpecFlowSearchEngine_report\chromedriver.exe";
+
+
         }
 
         [BeforeFeature]
@@ -59,14 +62,14 @@ namespace SpecFlowSearchEngine_report.Hooks
             extent.Flush();
 
 
-            driver = new ChromeDriver();
+            driver = new ChromeDriver(path);
             driver.Navigate().GoToUrl(projectPath.ToString() + @"\Reports\index.html");
         }
 
         [BeforeScenario]
         public static void BeforeScenario()
         {
-            driver = new ChromeDriver();
+            driver = new ChromeDriver(path);
             scenario = featureName.CreateNode<Scenario>(ScenarioContext.Current.ScenarioInfo.Title);
         }
 
