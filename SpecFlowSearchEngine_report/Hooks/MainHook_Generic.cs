@@ -63,14 +63,14 @@ namespace SpecFlowSearchEngine_report.Hooks
             extent.Flush();
 
 
-            driver = new ChromeDriver(path_chrome);
+            driver = new ChromeDriver();
             driver.Navigate().GoToUrl(projectPath.ToString() + @"\Reports\index.html");
         }
 
         [BeforeScenario]
         public static void BeforeScenario()
         {
-            driver = new ChromeDriver(path_chrome);
+            driver = new ChromeDriver();
             scenario = featureName.CreateNode<Scenario>(ScenarioContext.Current.ScenarioInfo.Title);
         }
 
