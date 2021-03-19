@@ -45,8 +45,8 @@ namespace SpecFlowSearchEngine_report.Hooks
             extent = new ExtentReports();
             extent.AttachReporter(htmlReporter);
 
-            //path_chrome = projectPath.ToString();
-            path_chrome = Environment.GetEnvironmentVariable("webdriver.chrome.driver");
+            path_chrome = projectPath.ToString();
+            //path_chrome = Environment.GetEnvironmentVariable("webdriver.chrome.driver");
 
         }
 
